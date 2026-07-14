@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickBite AI — Delivery Time Prediction</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- ============ TOP BAR ============ -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="18" r="2.6"/><circle cx="18.5" cy="18" r="2.6"/><path d="M5.5 18 9 9h6l4 9"/><path d="M9 9V5.5h4"/></svg>
+      </span>
+      <span class="brand-name">QuickBite<em>AI</em></span>
+    </div>
+    <div class="badge-live"><span class="dot" aria-hidden="true"></span>ETA engine online</div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Delivery&nbsp;time prediction</p>
+      <h1>Know when it<br><span class="accent">lands.</span></h1>
+      <p class="hero-sub">Feed in the rider, the route and the weather &mdash; QuickBite AI hands back a real ETA, no guesswork, no cold food.</p>
+      <div class="hero-stats">
+        <div><strong>18</strong><span>features analyzed</span></div>
+        <div><strong>&lt;1s</strong><span>prediction time</span></div>
+        <div><strong>81.3%</strong><span>R² score</span></div>
+      </div>
+    </div>
+
+    <div class="hero-route" aria-hidden="true">
+      <span class="route-pin route-pin--store">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9l1-5h14l1 5"/><path d="M4 9h16v10H4z"/><path d="M9 19v-5h6v5"/></svg>
+      </span>
+      <span class="route-track"></span>
+      <span class="route-scooter">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="18" r="2.4"/><circle cx="18.5" cy="18" r="2.4"/><path d="M5.5 18 9 9h6l4 9"/><path d="M9 9V5.5h4"/></svg>
+      </span>
+      <span class="route-pin route-pin--home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+      </span>
+    </div>
+  </section>
+
+  <!-- ============ FORM / DOCKET ============ -->
+  <form action="/predict" method="POST" id="etaForm" novalidate>
+
+  <div class="grid">
+
+    <div class="ticket-card">
+      <div class="item-head">
+        <span class="item-no">Item 01</span>
+        <h2>
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a8 8 0 0 1 16 0"/><path d="M3 14h18v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="6" r="1"/></svg>
+          </span>
+          Delivery Partner
+        </h2>
+      </div>
+
+      <label>Delivery Partner Age</label>
+      <input type="number" name="Delivery_person_Age" placeholder="18–60 (e.g. 25)" min="18" max="60" required>
+
+      <label>Delivery Partner Rating</label>
+      <input type="number" step="0.1" min="1" max="5" placeholder="1.0 – 5.0 (e.g. 4.7)" name="Delivery_person_Ratings" required>
+
+      <label>Vehicle Condition</label>
+      <select name="Vehicle_condition">
+        <option value="0">0 - Poor</option>
+        <option value="1">1 - Fair</option>
+        <option value="2">2 - Good</option>
+        <option value="3">3 - Excellent</option>
+      </select>
+
+      <label>Multiple Deliveries</label>
+      <select name="multiple_deliveries">
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+
+    <div class="ticket-card">
+      <div class="item-head">
+        <span class="item-no">Item 02</span>
+        <h2>
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+          </span>
+          Delivery Details
+        </h2>
+      </div>
+
+      <label>Distance (km)</label>
+      <input type="number" step="0.01" min="0" name="Distance" placeholder="e.g. 6.75" required>
+
+      <label>Type of Vehicle</label>
+      <select name="Type_of_vehicle">
+        <option>motorcycle</option>
+        <option>scooter</option>
+        <option>electric_scooter</option>
+        <option>bicycle</option>
+      </select>
+
+      <label>Type of Order</label>
+      <select name="Type_of_order">
+        <option>Meal</option>
+        <option>Snack</option>
+        <option>Drinks</option>
+        <option>Buffet</option>
+      </select>
+    </div>
+
+    <div class="ticket-card">
+      <div class="item-head">
+        <span class="item-no">Item 03</span>
+        <h2>
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4M16 3v4"/><circle cx="15.5" cy="15.5" r="3.4"/><path d="M15.5 14v1.6l1 1"/></svg>
+          </span>
+          Date &amp; Time
+        </h2>
+      </div>
+
+      <label>Order Date</label>
+      <input type="date" name="Order_Date" required>
+
+      <label>Order Time</label>
+      <input type="time" name="Time_Orderd" required>
+
+      <label>Pickup Time</label>
+      <input type="time" name="Time_Order_picked" required>
+    </div>
+
+    <div class="ticket-card">
+      <div class="item-head">
+        <span class="item-no">Item 04</span>
+        <h2>
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 1 1 .7-7.94A5.5 5.5 0 0 1 18 12.5 3.5 3.5 0 0 1 17.5 18H7z"/></svg>
+          </span>
+          Environment
+        </h2>
+      </div>
+
+      <label>Weather</label>
+      <select name="Weatherconditions">
+        <option>Sunny</option>
+        <option>Cloudy</option>
+        <option>Fog</option>
+        <option>Windy</option>
+        <option>Stormy</option>
+        <option>Sandstorms</option>
+      </select>
+
+      <label>Road Traffic Density</label>
+      <select name="Road_traffic_density">
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+        <option>Jam</option>
+      </select>
+
+      <label>Festival</label>
+      <select name="Festival">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+
+      <label>City</label>
+      <select name="City">
+        <option>Semi-Urban</option>
+        <option>Urban</option>
+        <option>Metropolitian</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="predict">
+    <button type="submit" class="predict-btn">
+      <span class="btn-label">Calculate ETA</span>
+      <span class="btn-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 5l7 7-7 7"/></svg>
+      </span>
+    </button>
+  </div>
+
+  </form>
+
+  {% if prediction %}
+  <section class="receipt" id="receiptResult">
+    <div class="receipt-slot" aria-hidden="true"><span></span><span></span></div>
+    <p class="receipt-label">Estimated Delivery Time</p>
+    <p class="receipt-time">{{ prediction }}<span>min</span></p>
+    <p class="receipt-note">thanks for riding with QuickBite&nbsp;AI</p>
+    <div class="receipt-barcode" aria-hidden="true"></div>
+  </section>
+  {% endif %}
+
+</div>
+
+<script src="../static/script.js"></script>
+</body>
+</html>
