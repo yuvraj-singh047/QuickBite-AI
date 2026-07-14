@@ -11,7 +11,7 @@ Predict the estimated food delivery time based on delivery partner details, orde
 ### Homepage
 
 ![Homepage](screenshots/Homepage_1.png)
-![Homepage](screenshots/Homepage_2.png)
+![Homepage](screenshots/2_Homepage.png)
 ### Prediction
 
 ![Prediction](screenshots/Prediction.png)
